@@ -1,0 +1,20 @@
+from flask import Flask, jsonify
+import random
+
+app = Flask(__name__)
+
+# Simulated signal generator
+@app.route('/get-signal', methods=['GET'])
+def get_signal():
+    signal = random.choice(['CALL', 'PUT', 'WAIT'])
+    return jsonify({
+        'signal': signal,
+        'confidence': random.randint(70, 100)
+    })
+
+@app.route('/', methods=['GET'])
+def home():
+    return "Pocket Option Signal Bot API is Live"
+
+if __name__ == '__main__':
+    app.run()
